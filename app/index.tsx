@@ -7,7 +7,7 @@ const index = () => {
     <View className="flex-1 items-center justify-center bg-primary">
       <Text className=' font-black text-3xl text-white'>Hello, index blah!</Text>
       <StatusBar />
-      <Link href={'/about'} className='text-3xl text-white py-10'>This is about mf..</Link>
+      <Link href={'/home'} className='text-3xl text-white py-10'>This is home mf..</Link>
     </View>
   );
 };

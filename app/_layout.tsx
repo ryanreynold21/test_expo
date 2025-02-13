@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 import "../global.css";
 import { useFonts } from "expo-font";
 
-SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync();
 
 const rootLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -20,16 +20,14 @@ const rootLayout = () => {
   });
 
   useEffect(() => {
-    if(error) throw error;
-    if(fontsLoaded) SplashScreen.hideAsync()
-  },[fontsLoaded,error])
+    if (error) throw error;
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded, error]);
 
-  if(!fontsLoaded && !error) return null
+  if (!fontsLoaded && !error) return null;
   return (
     <>
-      {/* <Text>Header</Text>
-      <Slot />
-    <Text>footer</Text> */}
+      {/* <Slot /> */}
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
