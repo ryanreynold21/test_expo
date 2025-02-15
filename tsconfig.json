@@ -14,5 +14,5 @@
     "metro.config.js",
     "babel.config.js",
     "nativewind-env.d.ts"
-  ]
+, "constants/icons.js"  ]
 }
