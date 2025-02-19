@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { icons } from "../../constants/icons";
 
 interface formProps {
   title: string;
@@ -22,7 +23,7 @@ const FormField = ({
   return (
     <View className={`${otherStyle} space-y-2`}>
       <Text className=" text-base font-pmedium text-white/60">{title}</Text>
-      <View className=" h-16 w-full bg-black-100 border-2 border-black-200 px-4 rounded-2xl focus:border-secondary ">
+      <View className=" h-16 w-full bg-black-100 border-2 border-black-200 px-4 rounded-2xl focus:border-secondary flex-row items-center">
         <TextInput
           value={value}
           onChangeText={handleChanges}
@@ -31,6 +32,15 @@ const FormField = ({
           className=" flex-1 text-white font-psemibold text-base"
           secureTextEntry={!show && title === "Password"}
         />
+        {title === "Password" && (
+          <TouchableOpacity onPress={() => setshow(!show)}>
+            <Image
+              resizeMode="contain"
+              className=" w-6 h-6"
+              source={show ? icons.eye : icons.eyeHide}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
