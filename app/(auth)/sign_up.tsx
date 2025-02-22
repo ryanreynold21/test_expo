@@ -1,20 +1,38 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../../constants/images";
 import FormField from "@/components/ui/Cus_form";
 import CustomButton from "@/components/ui/Cust_Btn";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { CreateAccount } from "../../lib/appwrite";
 
 const SignUp = () => {
+  const [isPanding, setIsPanding] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
-    username : ""
+    username: "",
   });
 
-  const handleSunmit = () => {
-    console.log(form);
+  const handleSunmit = async () => {
+    if (!form.username || !form.password || !form.email) {
+      Alert.alert("Error", "Please fill all Field");
+    }
+    setIsPanding(true);
+    try {
+      const response = await CreateAccount(
+        form.email,
+        form.password,
+        form.username
+      );
+
+      router.replace("/home")
+    } catch (error: any) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsPanding(false);
+    }
   };
   return (
     <SafeAreaView className=" bg-primary h-full">
@@ -53,6 +71,7 @@ const SignUp = () => {
             containerStyle={"mt-16"}
             handlePress={handleSunmit}
             text="SignUp"
+            isLoading={isPanding}
           />
           <View className=" mt-6 flex flex-row justify-center w-full gap-2">
             <Text className=" text-white/80 text-[14px] font-pextralight">
